@@ -1,0 +1,320 @@
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 186, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable
+exception in lookup_func 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "batch_cache.py", line 187, in lookup_func
+    image = cv2.imread(path)[:,:,::-1]
+TypeError: 'NoneType' object is not subscriptable

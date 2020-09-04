@@ -3,10 +3,11 @@
 *~
 *.swp
 *.pyc
-logs/
+logs/*
 demo/data/
 labels/
 *.mp4
 *.json
 *venv
 .idea
+demo/*

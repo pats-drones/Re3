@@ -1,0 +1,7 @@
+Model,weight name,Frames,learning rate,Notes
+2020_07_29_19_07_30_n_2_b_64_25000,checkpoint_2020_07_29_19_07_30_n_2_b_64_10726,3504,1E-05,Before the fix in the VOC2re3_format.py script
+2020_08_04_23_14_21_n_2_b_64_25000,checkpoint_2020_08_04_23_14_21_n_2_b_64_3623,6000,1E-05,Before the fix with the indexing in the npy file
+2020_08_05_23_22_09_n_2_b_64_25000,checkpoint_2020_08_05_23_22_09_n_2_b_64_8433,6000,1E-05,Finally good results
+2020_08_07_17_10_35_n_2_b_64_125000,checkpoint_2020_08_07_17_10_35_n_2_b_64_11209,9661,1E-05,After seeing frame skips as new video id
+2020_08_09_14_32_56_n_2_b_64_125000,,9661,5E-05,inceasing the learning rate
+,,9661,0.0005,High learning rate far to high to converge

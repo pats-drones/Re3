@@ -62,7 +62,7 @@ class Dataset(object):
 
         self.key_lookup = dict()
         self.datasets = []
-        self.add_dataset('imagenet_video')
+        self.add_dataset('MOT')
         simulator.make_paths()
 
     def initialize_tf_placeholders(self, forwardNetworkImagePlaceholder, prevLstmState, networkOutputs, state1, state2):

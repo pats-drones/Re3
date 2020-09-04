@@ -57,21 +57,23 @@ set_crop_size(CROP_SIZE)
 def make_paths(train=True):
     global IMAGE_NAMES, BOXES
     base_path = os.path.join(
-            os.path.dirname(__file__),
-            os.path.pardir,
-            os.path.pardir,
+            # os.path.dirname(__file__),
+            # os.path.pardir,
+            # os.path.pardir,
+            "/home/pats/Documents/models/re3-tensorflow",
             'training',
             'datasets',
-            'imagenet_detection')
+            'imagenet_video')
     image_datadir = os.path.join(
-            os.path.dirname(__file__),
-            os.path.pardir,
-            os.path.pardir,
+            # os.path.dirname(__file__),
+            # os.path.pardir,
+            # os.path.pardir,
+            "/home/pats/Documents/models/re3-tensorflow",
             'training',
             'datasets',
-            'imagenet_detection')
+            'imagenet_video')
     dataType = 'train' if train else 'val'
-    IMAGE_NAMES = [image_datadir + '/' + line.strip() for line in open(base_path + '/labels/' + dataType + '/image_names.txt')]
+    IMAGE_NAMES = [line.strip() for line in open(base_path + '/labels/' + dataType + '/image_names.txt')]
     BOXES = np.load(base_path + '/labels/' + dataType + '/labels.npy')
 
 def get_random_image():

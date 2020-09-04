@@ -170,7 +170,8 @@ class BatchCacheServer:
         self.image_paths.append(image_paths)
 
     def create_keys(self):
-        self.add_dataset('imagenet_video')
+        self.add_dataset('MOT')
+        # self.add_dataset('imagenet_video')
         time.sleep(1)
 
     def lookup_func(self, key):
@@ -183,6 +184,7 @@ class BatchCacheServer:
                 print('Reading image', imageName)
             for dd in range(self.num_unrolls):
                 path = self.image_paths[key[0]][ind + dd]
+                
                 image = cv2.imread(path)[:,:,::-1]
                 shape = pickle.dumps(image.shape)
                 string = image.tostring()

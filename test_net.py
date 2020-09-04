@@ -14,7 +14,7 @@ from re3_utils.util import im_util
 from re3_utils.util.drawing import *
 from re3_utils.util.IOU import *
 
-import get_datasets
+import training.get_datasets as get_datasets
 from tracker import re3_tracker
 
 from constants import CROP_PAD
@@ -31,7 +31,7 @@ NUM_COLS = 1
 NUM_ROWS = 1
 BORDER = 0
 FPS = 30
-PRINT = True
+PRINT = False
 
 np.set_printoptions(precision=6)
 np.set_printoptions(suppress=True)
@@ -41,6 +41,7 @@ class TestTrackerRunner(object):
         self.tracker = tracker
         self.imageNames = None
         self.totalIou = 0
+        self.totalRobustness = 0
         self.numFrames = 0
         self.ignoreFrames = 0
         self.initializeFrames = 0
@@ -48,11 +49,13 @@ class TestTrackerRunner(object):
         self.initialize = True
         self.gt = None
         self.display = False
+        self.wait = 0.0
 
     def reset(self):
         self.tracker.reset()
         self.imageNames = None
         self.totalIou = 0
+        self.totalRobustness = 0
         self.numFrames = 0
         self.ignoreFrames = 0
         self.initializeFrames = 0
@@ -62,8 +65,9 @@ class TestTrackerRunner(object):
         self.display = False
 
     def run_test(self, record=False, fancy_text=False, maxCount=-1, skipCount=0, mode='val',
-            dataset='imagenet_video', video_sample_rate=1, display=True):
+            dataset='MOT', video_sample_rate=1, display=True, wait=0.0):
         data = get_datasets.get_data_for_dataset(dataset, mode)
+        self.wait = wait
         self.gt = data['gt']
         self.display = display
         self.imageNames = data['image_paths']
@@ -91,7 +95,7 @@ class TestTrackerRunner(object):
         maxIter =  min(maxCount + skipCount, numImages)
         for imOn in range(skipCount, maxIter):
             if self.display:
-                plots, titles, results = self.runFrame(imageNums[int(imOn)], int(imOn))
+                plots, titles, results = self.runFrame(imageNums[int(imOn)], int(imOn), numImages)
                 im = subplot(plots, NUM_ROWS, NUM_COLS, titles=titles,
                         outputWidth=OUTPUT_WIDTH, outputHeight=OUTPUT_HEIGHT,
                         border=BORDER, fancy_text=fancy_text)
@@ -100,11 +104,18 @@ class TestTrackerRunner(object):
                 if record:
                     if imOn % 100 == 0:
                         print(imOn)
-                    writer.append_data(im[:,:,::-1])
+                    # writer.append_data(im[:,:,::-1])
+                    writer.append_data(cv2.cvtColor(im, cv2.COLOR_BGR2RGB))
+                    writer.append_data(cv2.cvtColor(im, cv2.COLOR_BGR2RGB))
+                    writer.append_data(cv2.cvtColor(im, cv2.COLOR_BGR2RGB))
+                    writer.append_data(cv2.cvtColor(im, cv2.COLOR_BGR2RGB))
             else:
-                results = self.runFrame(imageNums[int(imOn)], int(imOn))
-            if PRINT and imOn % 1000 == 0:
-                print('Results: ' + str([key + ' : ' + str(results[key]) for key in sorted(results.keys())]))
+                verbose = True
+                if mode == "val":
+                    verbose = False
+                results = self.runFrame(imageNums[int(imOn)], int(imOn), numImages, verbose=verbose)
+            if imOn % 500 == 0:
+                print('Results: ' + str([key + ' : ' + str(results[key]) for key in sorted(results.keys())]), f"{imOn}/{maxIter}")
 
         print('Final Results: ' + str([key + ' : ' + str(results[key]) for key in sorted(results.keys())]))
 
@@ -116,7 +127,8 @@ class TestTrackerRunner(object):
 
         return results
 
-    def runFrame(self, imOn, gtOn):
+    def runFrame(self, imOn, gtOn, numImages, verbose=True):
+       
         titles = []
 
         if (gtOn == 0 or not (
@@ -134,12 +146,13 @@ class TestTrackerRunner(object):
         robustness = 1
 
         gtBox = self.gt[gtOn, :4].copy()
+        
 
         if self.display:
             inputImageBGR = cv2.imread(self.imageNames[imOn])
             inputImage = inputImageBGR[:,:,::-1]
             imageToDraw = inputImageBGR.copy()
-            drawRect(imageToDraw, gtBox, PADDING * 2, [0, 255, 0])
+            drawRect(imageToDraw, gtBox, PADDING, [0, 255, 0])
         else:
             inputImage = self.imageNames[imOn]
 
@@ -148,10 +161,10 @@ class TestTrackerRunner(object):
             self.ignoreFrames -= 1
         else:
             if self.initialize:
-                outputBox = self.tracker.track('test_track', inputImage, gtBox)
+                outputBox = self.tracker.track('test_track', inputImage, gtBox, verbose=verbose)
                 self.initialize = False
             else:
-                outputBox = self.tracker.track('test_track', inputImage)
+                outputBox = self.tracker.track('test_track', inputImage, verbose=verbose)
 
             if self.display:
                 drawRect(imageToDraw, outputBox, PADDING, [0, 0, 255])
@@ -159,31 +172,33 @@ class TestTrackerRunner(object):
             if self.initializeFrames == 0:
                 iou = IOU(outputBox, gtBox)
                 self.totalIou += iou
-                if iou == 0:
+                if iou == 0:   ## if target is lost, reinitialize tracker
                     self.ignoreFrames = 5
                     self.initializeFrames = 10
                     self.lostTarget += 1
                     self.initialize = True
                 self.numFrames += 1
-                robustness = np.exp(-30.0 * self.lostTarget / self.numFrames)
+                self.totalRobustness  += np.exp(-30.0 * self.lostTarget / self.numFrames)
             else:
                 self.initializeFrames -= 1
 
 
         meanIou = self.totalIou * 1.0 / max(self.numFrames, 1)
+        meanRobustness = self.totalRobustness * 1.0 / max(self.numFrames, 1)
 
         if self.display:
             imageToDraw[0,0] = 255
             imageToDraw[0,1] = 0
             titles.append(
-                    'Frame %d, IOU %.2f, Mean IOU %.2f, Robustness %.2f, Dropped %d' %
-                    (gtOn, iou, meanIou, robustness, self.lostTarget))
+                    'Frame %d/ %d, IOU %.2f, Mean IOU %.2f, Robustness %.2f, Dropped %d' %
+                    (gtOn, numImages, iou, meanIou, robustness, self.lostTarget))
             imPlots = [imageToDraw]
+            time.sleep(self.wait)
 
         results = {
                 'gtOn' : gtOn,
                 'meanIou' : meanIou,
-                'robustness' : robustness,
+                'meanRobustness' : meanRobustness,
                 'lostTarget' : self.lostTarget,
                 }
 
@@ -196,13 +211,15 @@ class TestTrackerRunner(object):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Show the Network Results.')
     parser.add_argument('-r', '--record', action='store_true', default=False)
+    parser.add_argument('--weight_dir', default='weights_base', type=str, help='name of directory containing the weight of trained model')
     parser.add_argument('-f', '--fancy_text', action='store_true', default=False,
             help='Use a fancier font than OpenCVs, but takes longer to render an image.'
                  'This should be used for making higher-quality videos.')
     parser.add_argument('-n', '--max_images', action='store', default=-1, dest='maxCount', type=int)
     parser.add_argument('-s', '--num_images_to_skip', action='store', default=0, dest='skipCount', type=int)
     parser.add_argument('-m', '--mode', action='store', default='val', type=str, help='train or val')
-    parser.add_argument('--dataset', default='imagenet_video', type=str, help='name of the dataset')
+    parser.add_argument('--wait', action='store', default=0, type=float, help='wait time between showing of frames')
+    parser.add_argument('--dataset', default='MOT', type=str, help='name of the dataset')
     parser.add_argument('--video_sample_rate', default=1, type=int,
             help='One of every n videos will be run. Useful for testing portions of larger datasets.')
     parser.add_argument('-v', '--cuda_visible_devices', type=str, default=str(GPU_ID), help='Device number or string')
@@ -213,9 +230,9 @@ if __name__ == '__main__':
 
     FLAGS = parser.parse_args()
 
-    tracker = re3_tracker.Re3Tracker(FLAGS.cuda_visible_devices)
+    tracker = re3_tracker.Re3Tracker(FLAGS.cuda_visible_devices, FLAGS.weight_dir)
     test_track_runner = TestTrackerRunner(tracker)
     test_track_runner.run_test(record=FLAGS.record, fancy_text=FLAGS.fancy_text,
             maxCount=FLAGS.maxCount, skipCount=FLAGS.skipCount, mode=FLAGS.mode,
-            dataset=FLAGS.dataset, video_sample_rate=FLAGS.video_sample_rate, display=FLAGS.display)
+            dataset=FLAGS.dataset, video_sample_rate=FLAGS.video_sample_rate, display=FLAGS.display, wait=FLAGS.wait)
 

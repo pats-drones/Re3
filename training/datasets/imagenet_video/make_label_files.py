@@ -21,7 +21,7 @@ DEBUG = False
 
 def main(label_type):
     wildcard = '/*/*/' if label_type == 'train' else '/*/'
-    dataset_path = 'data/ILSVRC2015/'
+    dataset_path = "/home/pats/Documents/datasets/ILSVRC2015_VID_initial/"
     annotationPath = dataset_path + 'Annotations/'
     imagePath = dataset_path + 'Data/'
 
@@ -78,6 +78,7 @@ def main(label_type):
                 print('imNum %d of %d = %.2f%%' % (imNum, totalImages, imNum * 100.0 / totalImages))
             if not DEBUG:
                 # Leave off initial bit of path so we can just add parent dir to path later.
+                print(imageName)
                 imageNameFile.write(imageName + '\n')
             label = labels[ii]
             labelTree = ET.parse(label)

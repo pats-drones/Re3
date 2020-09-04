@@ -27,7 +27,7 @@ from constants import MAX_TRACK_LENGTH
 SPEED_OUTPUT = True
 
 class Re3Tracker(object):
-    def __init__(self, gpu_id=GPU_ID):
+    def __init__(self, gpu_id=GPU_ID, weight_name='weights_base', verbose=True):
         os.environ['CUDA_VISIBLE_DEVICES'] = str(gpu_id)
         basedir = os.path.dirname(__file__)
         tf.Graph().as_default()
@@ -39,7 +39,7 @@ class Re3Tracker(object):
                 prevLstmState=self.prevLstmState)
         self.sess = tf_util.Session()
         self.sess.run(tf.global_variables_initializer())
-        ckpt = tf.train.get_checkpoint_state(os.path.join(basedir, '..', LOG_DIR, 'checkpoints'))
+        ckpt = tf.train.get_checkpoint_state(os.path.join(basedir, '..', LOG_DIR, weight_name))
         if ckpt is None:
             raise IOError(
                     ('Checkpoint model could not be found. '
@@ -48,7 +48,7 @@ class Re3Tracker(object):
         tf_util.restore(self.sess, ckpt.model_checkpoint_path)
 
         self.tracked_data = {}
-
+        self.verbose = verbose
         self.time = 0
         self.total_forward_count = -1
 
@@ -56,7 +56,7 @@ class Re3Tracker(object):
     # unique_id{str}: A unique id for the object being tracked.
     # image{str or numpy array}: The current image or the path to the current image.
     # starting_box{None or 4x1 numpy array or list}: 4x1 bounding box in X1, Y1, X2, Y2 format.
-    def track(self, unique_id, image, starting_box=None):
+    def track(self, unique_id, image, starting_box=None, verbose=True):
         start_time = time.time()
 
         if type(image) == str:
@@ -117,7 +117,7 @@ class Re3Tracker(object):
         end_time = time.time()
         if self.total_forward_count > 0:
             self.time += (end_time - start_time - image_read_time)
-        if SPEED_OUTPUT and self.total_forward_count % 100 == 0:
+        if SPEED_OUTPUT and self.total_forward_count % 100 == 0 and verbose:
             print('Current tracking speed:   %.3f FPS' % (1 / (end_time - start_time - image_read_time)))
             print('Current image read speed: %.3f FPS' % (1 / (image_read_time)))
             print('Mean tracking speed:      %.3f FPS\n' % (self.total_forward_count / max(.00001, self.time)))

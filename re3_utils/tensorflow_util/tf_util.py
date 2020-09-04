@@ -217,6 +217,7 @@ def restore(session, save_file, raise_if_not_found=False):
 def restore_from_dir(sess, folder_path, raise_if_not_found=False):
     start_iter = 0
     ckpt = tf.train.get_checkpoint_state(folder_path)
+
     if ckpt and ckpt.model_checkpoint_path:
         print('Restoring')
         start_iter = restore(sess, ckpt.model_checkpoint_path)

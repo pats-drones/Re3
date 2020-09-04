@@ -10,6 +10,7 @@ import sys
 import tensorflow as tf
 import time
 import threading
+import datetime
 
 from io import BytesIO
 
@@ -42,6 +43,7 @@ NUM_ITERATIONS = int(1e6)
 PORT = 9997
 
 LEARNING_RATE = 1e-5
+# LEARNING_RATE = 5e-4
 
 def main(FLAGS):
     global PORT, delta, REPLAY_BUFFER_SIZE
@@ -122,15 +124,16 @@ def main(FLAGS):
     # Initialize the network and load saved parameters.
     sess.run(init)
     startIter = 0
+    tt = time.localtime()
+    time_str = ('%04d_%02d_%02d_%02d_%02d_%02d' % (tt.tm_year, tt.tm_mon, tt.tm_mday, tt.tm_hour, tt.tm_min, tt.tm_sec))
+    sess_name = time_str + '_n_' + str(delta) + '_b_' + str(batchSize)
     if FLAGS.restore:
         print('Restoring')
-        startIter = tf_util.restore_from_dir(sess, os.path.join(LOG_DIR, 'checkpoints'))
+        print(os.path.join(LOG_DIR, 'checkpoints'))
+        startIter = tf_util.restore_from_dir(sess, os.path.join(LOG_DIR, 'weights_base'))
     if not debug:
-        tt = time.localtime()
-        time_str = ('%04d_%02d_%02d_%02d_%02d_%02d' %
-                (tt.tm_year, tt.tm_mon, tt.tm_mday, tt.tm_hour, tt.tm_min, tt.tm_sec))
-        summary_writer = tf.summary.FileWriter(LOG_DIR + '/train/' + time_str +
-                '_n_' + str(delta) + '_b_' + str(batchSize), sess.graph)
+        
+        summary_writer = tf.summary.FileWriter(LOG_DIR + '/train/' + f"{sess_name}_{FLAGS.max_steps}", sess.graph)
         summary_full = tf.summary.merge_all()
         conv_var_list = [v for v in tf.trainable_variables() if 'conv' in v.name and 'weight' in v.name and
                 (v.get_shape().as_list()[0] != 1 or v.get_shape().as_list()[1] != 1)]
@@ -195,6 +198,7 @@ def main(FLAGS):
 
             timeTotal += (endSolver - startSolver)
             if timing and (iteration - 1) % 10 == 0:
+                print(f"Time:            {datetime.datetime.now().strftime('%m/%d/%Y, %H:%M:%S')}")
                 print('Iteration:       %d' % (iteration - 1))
                 print('Loss:            %.3f' % lossValue)
                 print('Average Time:    %.3f' % (timeTotal / numIters))
@@ -205,7 +209,9 @@ def main(FLAGS):
 
             # Save a checkpoint and remove old ones.
             if iteration % 500 == 0 or iteration == FLAGS.max_steps:
-                checkpoint_file = os.path.join(LOG_DIR, 'checkpoints', 'model.ckpt')
+                if not os.path.exists(LOG_DIR + f'/checkpoint_{sess_name}_{iteration-1}'):
+                    os.makedirs(LOG_DIR + f'checkpoint_{sess_name}_{iteration-1}')
+                checkpoint_file = os.path.join(LOG_DIR, f'checkpoint_{sess_name}_{iteration-1}', 'model.ckpt')
                 saver.save(sess, checkpoint_file, global_step=iteration)
                 if FLAGS.clearSnapshots:
                     files = glob.glob(LOG_DIR + '/checkpoints/*')
@@ -244,17 +250,17 @@ def main(FLAGS):
                             feed_dict={learningRate : LEARNING_RATE})
                     summary_writer.add_summary(summary_str, iteration)
                     summary_writer.flush()
-                if (FLAGS.run_val and (numIters == 1 or iteration % 500 == 0)):
+                if (FLAGS.run_val and (numIters == 1 or iteration % 250 == 0)):
                     # Run a validation set eval in a separate thread.
                     def test_func(test_iter_on):
                         print('Starting test iter', test_iter_on)
                         test_runner.reset()
                         result = test_runner.run_test(dataset=FLAGS.val_dataset, display=False)
                         summary_str = sess.run(test_summary_op, feed_dict={
-                            robustness_ph : result['robustness'],
+                            robustness_ph : result['meanRobustness'],
                             lost_targets_ph : result['lostTarget'],
                             mean_iou_ph : result['meanIou'],
-                            avg_ph : (result['meanIou'] + result['robustness']) / 2,
+                            avg_ph : (result['meanIou'] + result['meanRobustness']) / 2,
                             })
                         summary_writer.add_summary(summary_str, test_iter_on)
                         os.remove('results.json')
@@ -294,9 +300,11 @@ def main(FLAGS):
         # Save if error or killed by ctrl-c.
         if not debug:
             print('Saving...')
-            checkpoint_file = os.path.join(LOG_DIR, 'checkpoints', 'model.ckpt')
+            if not os.path.exists(LOG_DIR + f'/checkpoint_{sess_name}_{iteration-1}'):
+                os.makedirs(LOG_DIR + f'/checkpoint_{sess_name}_{iteration-1}')
+            checkpoint_file = os.path.join(LOG_DIR, f'checkpoint_{sess_name}_{iteration-1}', 'model.ckpt')
             saver.save(sess, checkpoint_file, global_step=iteration)
-        raise
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Training for Re3.')
@@ -308,9 +316,9 @@ if __name__ == '__main__':
     parser.add_argument('-t', '--timing', action='store_true', default=False)
     parser.add_argument('-o', '--output', action='store_true', default=False)
     parser.add_argument('-c', '--clear_snapshots', action='store_true', default=False, dest='clearSnapshots')
-    parser.add_argument('-p', '--port', action='store', default=9987, dest='port', type=int)
+    parser.add_argument('-p', '--port', action='store', default=9997, dest='port', type=int)
     parser.add_argument('--run_val', action='store_true', default=False)
-    parser.add_argument('--val_dataset', type=str, default='vot', help='Dataset to test on.')
+    parser.add_argument('--val_dataset', type=str, default='MOT', help='Dataset to test on.')
     parser.add_argument('--val_device', type=str, default='0', help='Device number or string for val process to use.')
     parser.add_argument('-m', '--max_steps', type=int, default=NUM_ITERATIONS, help='Number of steps to run trainer.')
     FLAGS = parser.parse_args()
